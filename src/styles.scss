@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+// @import '../node_modules/modern-normalize/modern-normalize.css';
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap");
+@import "../node_modules/primeflex/primeflex.css";
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  font-size: 62.5%;
+  /************ Custom Properties ***********/
+  /* Main Color */
+  --primary-color: #212121;
+  /* Secondary Color */
+  --secondary-color: #414141;
+  /* Secondary Color Modified */
+  --secondary-color-m: #2717038e;
+  /* tertiary color */
+  --tertiary-color: #ffffff;
+  /* tertiary color modified */
+  --tertiary-color-m: #f1f1f1;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.8;
+
+  font-weight: 400;
+}
+
+h1 {
+  font-weight: 400;
+}

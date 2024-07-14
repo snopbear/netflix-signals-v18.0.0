@@ -1,0 +1,9 @@
+footer {
+  background: var(--primary-color);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 6.5rem;
+  color: var(--tertiary-color);
+}
