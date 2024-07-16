@@ -1,31 +1,30 @@
 <div class="slider">
-  <div class="slider">
-    <div class="slide-bg">
-      <img src="https://www.awn.com/sites/default/files/styles/original/public/image/featured/dragon_ball_z_the_dead_zone_horizontal_banner_3840x2160-1280.jpg?itok=2H5FewQ0" alt="">
-    </div>
-    <div class="slide-pane">
-      <h2 class="title">Slide Title</h2>
-      <div class="meta">
-        <div class="rating">
-          <i>
-            star-icon
-          </i>
-          <span>8.9</span>
-          <span>/10</span>
-        </div>
-
-        <div class="votes">
-          <i>vote-icon</i>
-          <span>4433</span>
-        </div>
-
+  @for (movie of _moviesService.movieSignal(); track movie.id;let movieIndex = $index) {
+  <ng-container *ngIf="movieIndex === slideIndex" @slideFade>
+    <div class="slide">
+      <div class="slide-bg">
+        <img [src]="imagesBaseUrl + 'w1280' + movie.backdrop_path" [alt]="movie.title" />
       </div>
-      <div class="release-date">
-        20.06.2024
-      </div>    <div class="description">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam explicabo, laboriosam animi eaque voluptatum totam cumque aut aliquid excepturi est error iure quis, eum ad? Ducimus expedita aliquid recusandae iusto.
+      <div class="slide-pane">
+        <h2 class="title">{{ movie.original_title }}</h2>
+        <div class="meta mb-4">
+          <div class="rating mb-1">
+            <i class="pi pi-star-fill"></i>
+            <span>{{ movie.vote_average }}</span>
+            <span>/10</span>
+          </div>
+          <div class="votes mb-1">
+            <i class="pi pi-users"></i>
+            <span>{{ movie.vote_count }}</span>
+          </div>
+          <div class="release-date">
+            <i class="pi pi-calendar"></i>
+            <span>{{ movie.release_date | date : 'yyyy' }}</span>
+          </div>
+        </div>
+        <div class="description">{{ movie.overview }}</div>
+      </div>
     </div>
-    </div>
-
-  </div>
+  </ng-container>
+  }
 </div>

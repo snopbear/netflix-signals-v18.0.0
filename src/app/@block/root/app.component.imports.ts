@@ -1,6 +1,7 @@
-import { FooterComponent } from "../wedgets/footer/footer.component";
-import { HeaderComponent } from "../wedgets/header/header.component";
-
+import {
+  FooterComponent,
+  HeaderComponent,
+} from '../widgets/index';
 
 
 const components = [HeaderComponent,FooterComponent];
