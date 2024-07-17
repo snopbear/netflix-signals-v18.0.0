@@ -1,18 +1,17 @@
-import { Component, inject, input, Input, signal } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import bannerComponentImports from './banner.component.imports';
-import { MoviesService } from '@services-specific/index';
-import { IMovie } from '@models/interfaces';
+import { IMovie, ITvShow } from '@models/interfaces';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'netflix-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.scss'],
   standalone: true,
-  imports: [bannerComponentImports],
+  imports: [bannerComponentImports,NgIf,NgFor],
 })
 export class BannerComponent {
-  _moviesService = inject(MoviesService);
-  // shows =signal(input.required<IMovie[]>) ;
 
+  @Input() shows!: () => IMovie[];
   @Input() title = 'Popular Movies';
 }

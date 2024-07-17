@@ -9,6 +9,9 @@ import {
 import { MoviesService } from '@services-specific/index';
 import { constants } from '../../../constants';
 import sliderComponentImports from './slider.component.imports';
+import { Observable } from 'rxjs';
+import { IMovie } from '@models/interfaces';
+import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'netflix-slider',
   templateUrl: './slider.component.html',
@@ -26,7 +29,10 @@ export class SliderComponent implements OnInit {
   //#region injectable properties
   _moviesService = inject(MoviesService);
 
-  
+  private moviesPopular$: Observable<IMovie[]> =
+    this._moviesService.getPopularMovies();
+  moviePopularSignal = toSignal(this.moviesPopular$, { initialValue: [] });
+
   //#endregion
 
   //#region local variables

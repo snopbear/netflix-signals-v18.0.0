@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import {   DatePipe, LowerCasePipe } from '@angular/common';  // Ensure this is correct
+import {   DatePipe } from '@angular/common';  // Ensure this is correct
 @Component({
   selector: 'netflix-footer',
   templateUrl: './footer.component.html',
