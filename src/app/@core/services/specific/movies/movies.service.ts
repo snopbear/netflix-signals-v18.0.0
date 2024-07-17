@@ -11,32 +11,31 @@ import { IMovie } from '@models/interfaces';
 export class MoviesService {
   //#region Injectable
   _httpCalls = inject(HttpCallsService);
-
-  //#endregion
+  //#endregion Injectable
 
   //#region variables
   Urls = {
     popular: `${constants.apiUrl}/movie/popular?api_key=${constants.apiKey}&language=en-US&page=1`,
+    upcoming: `${constants.apiUrl}/movie/upcoming?api_key=${constants.apiKey}&language=en-US&page=1`,
+    topRated: `${constants.apiUrl}/movie/top_rated?api_key=${constants.apiKey}&language=en-US&page=1`,
+    byType: `${constants.apiUrl}/movie/by_type?api_key=${constants.apiKey}&language=en-US&page=1`,
   };
+  //#endregion variables
 
-  //#endregion
+  //#region Popural
+  private moviesPopular$: Observable<IMovie[]> = this.getPopularMovies();
+  moviePopular = toSignal(this.moviesPopular$, { initialValue: [] });
 
-  //#region Signals
-  private movies$: Observable<IMovie[]> = this.getMovies();
-  movie = toSignal(this.movies$, { initialValue: [] });
-
-  movieSignal = computed(() => {
+  moviePopuralSignal = computed(() => {
     try {
-      return this.movie();
+      return this.moviePopular();
     } catch (error: any) {
       console.log(error['message']);
       return console.log(error['message']);
     }
   });
-  //#endregion
 
-  //#region
-  getMovies(): Observable<IMovie[]> {
+  getPopularMovies(): Observable<IMovie[]> {
     return this._httpCalls
       .consumingAPI<IMovie[]>(this.Urls.popular, 'GET')
       .pipe(
@@ -45,5 +44,51 @@ export class MoviesService {
         })
       );
   }
-  //#endregion
+  //#endregion Popural
+
+  //#region Upcoming
+  private moviesUpcoming$: Observable<IMovie[]> = this.getUpcomingMovies();
+  movieUpcoming = toSignal(this.moviesUpcoming$, { initialValue: [] });
+
+  movieUpcomingSignal = computed(() => {
+    try {
+      return this.movieUpcoming();
+    } catch (error: any) {
+      console.log(error['message']);
+      return console.log(error['message']);
+    }
+  });
+  getUpcomingMovies(): Observable<IMovie[]> {
+    return this._httpCalls
+      .consumingAPI<IMovie[]>(this.Urls.upcoming, 'GET')
+      .pipe(
+        map((res: IMovie | any) => {
+          return res.results;
+        })
+      );
+  }
+  //#endregion Upcoming
+
+  //#region Upcoming
+  private moviesTopRated$: Observable<IMovie[]> = this.getTopRateMovies();
+  movieTopRate = toSignal(this.moviesTopRated$, { initialValue: [] });
+
+  movieTopRateSignal = computed(() => {
+    try {
+      return this.movieUpcoming();
+    } catch (error: any) {
+      console.log(error['message']);
+      return console.log(error['message']);
+    }
+  });
+  getTopRateMovies(): Observable<IMovie[]> {
+    return this._httpCalls
+      .consumingAPI<IMovie[]>(this.Urls.upcoming, 'GET')
+      .pipe(
+        map((res: IMovie | any) => {
+          return res.results as IMovie[];
+        })
+      );
+  }
+  //#endregion Upcoming
 }

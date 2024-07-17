@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { SliderComponent } from '../../@shared/components/slider/slider.component';
+import homeComponentImports from './home.component.imports';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [SliderComponent],
+  imports: [homeComponentImports],
 })
-export class HomeComponent {}
+export class HomeComponent {
+
+}

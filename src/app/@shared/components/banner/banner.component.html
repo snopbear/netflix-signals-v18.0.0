@@ -1,0 +1,16 @@
+<div class="banner container">
+  <h1>{{ title }} </h1>
+  <div class="grid">
+    @for (show of _moviesService.movieUpcomingSignal(); track $index) {
+        <div class="col-2" >
+          <netflix-show-item [showItem]="show" />
+        </div>
+    }
+    @empty {
+      <p>No data to display</p>
+    }
+
+  </div>
+</div>
+
+

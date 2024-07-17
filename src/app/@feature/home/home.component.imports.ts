@@ -1,6 +1,7 @@
+import { BannerComponent } from "src/app/@shared/components/banner/banner.component";
 import { SliderComponent } from "../../@shared/components/slider/slider.component";
 
-const components=[SliderComponent];
+const components = [SliderComponent, BannerComponent];
 
 const homeComponentImports=[...components];
 
