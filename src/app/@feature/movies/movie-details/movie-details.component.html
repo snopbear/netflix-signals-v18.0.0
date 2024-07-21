@@ -1,0 +1,109 @@
+<netflix-slider [slides]="moviesDetailsSignal()" [isHeader]="false" />
+<ng-container *ngIf="moviesDetailsSignal()[0] as show">
+  <div class="tabs">
+    <input type="radio" name="tabs" id="tab1" checked>
+    <label for="tab1">Overview</label>
+    <input type="radio" name="tabs" id="tab2">
+    <label for="tab2">Video</label>
+    <input type="radio" name="tabs" id="tab3">
+    <label for="tab3">Images</label>
+
+    <div class="tab-content" id="content1">
+
+
+      <div class="grid">
+        <div class="col-3">
+          <img class="poster" [src]="imagesSizes.medium + show.poster_path" alt="" />
+        </div>
+        <div class="col-9">
+          <h2>Overview</h2>
+          <p class="overview">{{ show?.overview }}</p>
+          <hr class="break">
+          <div class="stat">
+            <div class="label">Release Date:</div>
+            <div class="value">
+              {{ show.release_date | date : 'dd.MM.yyyy' }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Language</div>
+            <div class="value">
+              {{ show.original_language }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Revenue:</div>
+            <div class="value">
+              {{ show.revenue | currency }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Duration:</div>
+            <div class="value">{{ show.runtime }} min</div>
+          </div>
+          <div class="stat">
+            <div class="label">Status:</div>
+            <div class="value">
+              {{ show.status }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Genres:</div>
+            <div class="value">
+              <ul>
+                <li *ngFor="let genre of show.genres">{{ genre.name }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ngx-slick-container">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+          (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+          (beforeChange)="beforeChange($event)">
+          @for (slide of castDetailsSignal(); track slide.name) {
+          <div ngxSlickItem class="slide image-container">
+            @if (slide.profile_path) {
+            <img class="hover-opacity" [src]="imagesSizes.medium + slide.profile_path" alt="" width="98%" />
+
+            }
+            @else {
+            <img class="hover-opacity" src="/assets/images/blue.jpg" alt="No Pitcure"
+              style="width: 320px;height: 475px;" />
+
+            }
+          </div>
+          }
+        </ngx-slick-carousel>
+      </div>
+
+    </div>
+    <div class="tab-content" id="content2">
+
+      <ng-container *ngIf="videoDetailsSignal() as showVideos">
+        <div class="grid">
+          <div class="col-4" *ngFor="let showVideo of showVideos">
+            <netflix-video-embed [key]="showVideo.key" />
+
+          </div>
+
+        </div>
+      </ng-container>
+    </div>
+    <div class="tab-content" id="content3">
+
+      <ng-container *ngIf="imagesDetailsSignal()as showImages">
+        <div class="grid">
+
+          <div class="col-2" *ngFor="let showImage of showImages">
+            <!-- <p-image [src]="imagesSizes.large + showImage.file_path" [alt]="show.title" width="100%"
+        [preview]="true"></p-image> -->
+            <img [src]="imagesSizes.large + showImage?.file_path" [alt]="show.title" width="100%" />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+</ng-container>

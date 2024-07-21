@@ -13,6 +13,10 @@ export interface IMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  revenue?: number;
+  runtime?: string;
+  status?: string;
+  genres?: Genre[];
 }
 
 export interface IMovieDTO {
@@ -21,3 +25,8 @@ export interface IMovieDTO {
   total_pages: number;
   total_results: number;
 }
+
+export interface Genre  {
+  id: string;
+  name: string;
+};

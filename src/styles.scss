@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/modern-normalize/modern-normalize.css';
+@import "../node_modules/modern-normalize/modern-normalize.css";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap");
 @import "../node_modules/primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
@@ -22,9 +22,12 @@
   /* Secondary Color Modified */
   --secondary-color-m: #716f74;
   /* tertiary color */
-  --tertiary-color: #2B2B2C;
+  --tertiary-color: #790909;
   /* tertiary color modified */
   --tertiary-color-m: #ffffff;
+
+    /* tertiary color */
+  --tertiary-color-s: #cc0000;
 }
 
 body {
@@ -32,13 +35,16 @@ body {
   line-height: 1.8;
   font-weight: 400;
   font-size: 1.75rem;
-  background-color: var(--tertiary-color);
+  background-color: var(--secondary-color);
 }
-
+a {
+  color: #fff;
+  text-decoration: none;
+}
 h1 {
   font-weight: 400;
 }
-.container{
+.container {
   margin: 0.5rem;
   padding: 0.5rem;
 }

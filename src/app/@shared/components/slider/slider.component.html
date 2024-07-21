@@ -1,5 +1,5 @@
 <div class="slider">
-  @for (movie of moviePopularSignal(); track movie.id;let movieIndex = $index) {
+  @for (movie of slides(); track movie.id;let movieIndex = $index) {
   <div *ngIf="movieIndex === slideIndex" @slideFade>
     <div class="slide">
       <div class="slide-bg">
@@ -33,3 +33,6 @@
   </p>
 }
 </div>
+
+
+

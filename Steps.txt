@@ -2,11 +2,12 @@ ng add @angular-eslint/schematics
 npm install primeflex
 
 
+npx npm-check-updates -upgrade -target "minor" -- filter "/@angular.*/
 
 
 
-         "server": "src/main.server.ts",
-            "prerender": false,
-            "ssr": {
-              "entry": "server.ts"
-            }
+"server": "src/main.server.ts",
+    "prerender": false,
+    "ssr": {
+      "entry": "server.ts"
+    }

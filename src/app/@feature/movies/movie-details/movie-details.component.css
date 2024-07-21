@@ -1,0 +1,138 @@
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.tabs {
+  position: relative;
+  margin: 2rem;
+  padding: 1rem 0;
+  background-color: var(--primary-color);
+  text-align: center; /* Center the tab headers */
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tabs label {
+  font-weight: bolder;
+  display: inline-block;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  margin-right: -1px;
+  transition: transform 0.5s ease-in-out, background-color 0.3s, box-shadow 0.3s;
+  margin: 0 5px; /* Add some spacing between tabs */
+}
+
+.tabs label:hover {
+  color: var(--tertiary-color-m);
+  transform: scale(1.02);
+}
+
+.tabs .tab-content {
+  display: none;
+  padding: 20px;
+  margin-top: 10px;
+  border-top: 1px solid var(--primary-color);
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  text-align: left; /* Ensure content is left-aligned */
+  color: var(--tertiary-color-m);
+}
+
+.tabs input[type="radio"] + label {
+  color: var(--tertiary-color-m);
+}
+
+.tabs input[type="radio"]:checked + label {
+  color: var(--tertiary-color);
+  border-bottom: 3px solid var(--tertiary-color);
+  /* background-color: rgba(44, 43, 43, 0.1);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+  transform: scale(1.02); /* Slightly increase the scale for the selected tab */
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3 {
+  display: block;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*************************************************/
+
+.break {
+  border: 1px solid var(--tertiary-color);
+  margin: 1rem;
+}
+.poster {
+  max-width: 100%;
+}
+
+.overview {
+  line-height: 1.5;
+}
+
+.show-image {
+  width: 100%;
+}
+
+.stat {
+  display: flex;
+  margin-bottom: 15px;
+  .label {
+    width: 150px;
+    font-weight: bold;
+  }
+  .value {
+    color: var(--tertiary-color-s);
+  }
+}
+
+.actor {
+  padding: 10px;
+  img {
+    width: 100%;
+  }
+  div {
+    text-align: center;
+  }
+}
+
+
+
+
+/* ngx-slick Styles */
+.ngx-slick-container {
+  padding: 2rem;
+  margin: 2rem;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hover-opacity {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.hover-opacity:hover {
+  opacity: 0.6; /* Adjust the opacity value as needed */
+}

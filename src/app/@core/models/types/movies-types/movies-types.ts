@@ -1,0 +1,1 @@
+export declare type MovieType = 'popular'|'upcoming'|'top_rated';

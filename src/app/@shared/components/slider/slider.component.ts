@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, input, Input, OnInit, signal } from '@angular/core';
 import {
   animate,
   state,
@@ -6,18 +6,16 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MoviesService } from '@services-specific/index';
 import { constants } from '../../../constants';
 import sliderComponentImports from './slider.component.imports';
-import { Observable } from 'rxjs';
 import { IMovie } from '@models/interfaces';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'netflix-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
   standalone: true,
-  imports: [sliderComponentImports],
+  imports: [sliderComponentImports, JsonPipe],
   animations: [
     trigger('slideFade', [
       state('void', style({ opacity: 0 })),
@@ -26,21 +24,21 @@ import { toSignal } from '@angular/core/rxjs-interop';
   ],
 })
 export class SliderComponent implements OnInit {
-  //#region injectable properties
-  _moviesService = inject(MoviesService);
+  slides = input.required<IMovie[]>();
 
-  private moviesPopular$: Observable<IMovie[]> =
-    this._moviesService.getPopularMovies();
-  moviePopularSignal = toSignal(this.moviesPopular$, { initialValue: [] });
+  
+  private _isHeader = signal<boolean>(false);
+  @Input()
+  set isHeader(value: boolean) {
+    this._isHeader.set(value);
+  }
+  get isHeader(): boolean {
+    return this._isHeader();
+  }
 
-  //#endregion
-
-  //#region local variables
   imagesBaseUrl = constants.imagesBaseUrl;
   slideIndex = 0;
-  //#endregion
 
-  //#region private methods
   changeSlide() {
     setInterval(() => {
       this.slideIndex += 1;
@@ -50,13 +48,9 @@ export class SliderComponent implements OnInit {
     }, 5000);
   }
 
-  //#endregion
-
-  //#region lifecycle hock
   ngOnInit() {
-    this.changeSlide();
+    if (this.isHeader) {
+      this.changeSlide();
+    }
   }
-  //#endregion
-
-  //
 }

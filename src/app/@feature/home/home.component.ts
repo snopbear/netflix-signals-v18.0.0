@@ -13,16 +13,33 @@ import { toSignal } from '@angular/core/rxjs-interop';
   imports: [homeComponentImports],
 })
 export class HomeComponent {
-  _moviesService = inject(MoviesService);
-  _TvSeriesService = inject(TvSeriesService);
 
-  private moviesUpcoming$: Observable<IMovie[]> =
-    this._moviesService.getUpcomingMovies();
+  _moviesService = inject(MoviesService);
+  
+  _TvSeriesService = inject(TvSeriesService);
+  
+
+  private moviesUpcoming$: Observable<IMovie[]> = this._moviesService.getMovies(
+    'upcoming',
+    12
+  );
   movieUpcomingSignal = toSignal(this.moviesUpcoming$, { initialValue: [] });
 
-  private moviesPopular$: Observable<IMovie[]> =
-    this._moviesService.getPopularMovies();
+
+
+  private moviesPopular$: Observable<IMovie[]> = this._moviesService.getMovies(
+    'popular',
+    12
+  );
   moviePopularSignal = toSignal(this.moviesPopular$, { initialValue: [] });
+
+
+  
+  private moviesTopRated$: Observable<IMovie[]> = this._moviesService.getMovies(
+    'top_rated',
+    12
+  );
+  movieTopRatedSignal = toSignal(this.moviesTopRated$, { initialValue: [] });
 
   private tvSeriesPopular$: Observable<IMovie[]> = this._TvSeriesService
     .getPopularTvSeries()

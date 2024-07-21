@@ -15,6 +15,13 @@ export const routes: Routes = [
         (x) => x.MovieListComponent
       ),
   },
+  {
+    path: 'details/:id',
+    loadComponent: () =>
+      import('./@feature/movies/movie-details/movie-details.component').then(
+        (x) => x.MovieDetailsComponent
+      ),
+  },
   //   {
   //     path: 'associate/:id',
   //     loadComponent: () =>
