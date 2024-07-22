@@ -7,6 +7,7 @@
       "@services-common/*": ["src/app/@core/services/common/*"],
       "@services-specific/*": ["src/app/@core/services/specific/*"],
       "@models/*": ["src/app/@core/models/*"],
+      "@constants/*": ["src/app/@constants/*"],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

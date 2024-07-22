@@ -2,22 +2,23 @@ import { Component, inject } from '@angular/core';
 import homeComponentImports from './home.component.imports';
 import { MoviesService, TvSeriesService } from '@services-specific/index';
 import { map, Observable } from 'rxjs';
-import { IMovie, ITvShow, mapTopMovies } from '@models/interfaces';
+import { IMovie, mapTopMovies } from '@models/interfaces';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [homeComponentImports],
+  imports: [homeComponentImports,NgIf],
 })
 export class HomeComponent {
 
   _moviesService = inject(MoviesService);
   
   _TvSeriesService = inject(TvSeriesService);
-  
+
 
   private moviesUpcoming$: Observable<IMovie[]> = this._moviesService.getMovies(
     'upcoming',

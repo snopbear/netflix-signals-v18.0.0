@@ -6,6 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { AuthorizationInterceptor } from './@core/interceptors/authorization-interceptor/authorization.interceptor';
+import { NgOptimizedImage } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +18,6 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([AuthorizationInterceptor])
     ),
+    NgOptimizedImage
   ],
 };

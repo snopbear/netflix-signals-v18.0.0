@@ -6,16 +6,15 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { constants } from '../../../constants';
+import { mainConstants } from '@constants/index';
 import sliderComponentImports from './slider.component.imports';
 import { IMovie } from '@models/interfaces';
-import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'netflix-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
   standalone: true,
-  imports: [sliderComponentImports, JsonPipe],
+  imports: [sliderComponentImports],
   animations: [
     trigger('slideFade', [
       state('void', style({ opacity: 0 })),
@@ -26,7 +25,6 @@ import { JsonPipe } from '@angular/common';
 export class SliderComponent implements OnInit {
   slides = input.required<IMovie[]>();
 
-  
   private _isHeader = signal<boolean>(false);
   @Input()
   set isHeader(value: boolean) {
@@ -36,7 +34,7 @@ export class SliderComponent implements OnInit {
     return this._isHeader();
   }
 
-  imagesBaseUrl = constants.imagesBaseUrl;
+  imagesBaseUrl = mainConstants.imagesBaseUrl;
   slideIndex = 0;
 
   changeSlide() {

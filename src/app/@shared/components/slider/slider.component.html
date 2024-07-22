@@ -1,9 +1,11 @@
+@defer (on viewport) {
+
 <div class="slider">
   @for (movie of slides(); track movie.id;let movieIndex = $index) {
   <div *ngIf="movieIndex === slideIndex" @slideFade>
     <div class="slide">
       <div class="slide-bg">
-        <img [src]="imagesBaseUrl + 'w1280' + movie.backdrop_path" [alt]="movie.title" />
+        <img  [src]="imagesBaseUrl + 'w1280' + movie.backdrop_path" [alt]="movie.title" />
       </div>
       <div class="slide-pane">
         <h2 class="title">{{ movie.original_title }}</h2>
@@ -33,6 +35,7 @@
   </p>
 }
 </div>
-
+}
+@placeholder {<div>loading</div>}
 
 

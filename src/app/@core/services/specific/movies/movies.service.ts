@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { constants } from '../../../../constants';
+import { mainConstants } from '@constants/index';
 import { HttpCallsService } from '@services-common/index';
 import { IActor, IImage, IMovie, IMovieDTO, IVideo } from '@models/interfaces';
 import { MovieType } from '@models/types';
@@ -14,7 +14,7 @@ export class MoviesService {
   getMovies(type: MovieType, count = 20): Observable<IMovie[]> {
     return this._httpCalls
       .consumingAPI<IMovieDTO[]>(
-        `${constants.apiUrl}/movie/${type}?api_key=${constants.apiKey}`,
+        `${mainConstants.apiUrl}/movie/${type}?api_key=${mainConstants.apiKey}`,
         'GET'
       )
       .pipe(
@@ -27,7 +27,7 @@ export class MoviesService {
   getMovieById(id: number): Observable<IMovie> {
     return this._httpCalls
       .consumingAPI<IMovie>(
-        `${constants.apiUrl}/movie/${id}?api_key=${constants.apiKey}&language=en-US`,
+        `${mainConstants.apiUrl}/movie/${id}?api_key=${mainConstants.apiKey}&language=en-US`,
         'GET'
       )
       .pipe(
@@ -40,7 +40,7 @@ export class MoviesService {
   getMovieVideos(id: string): Observable<IVideo[]> {
     return this._httpCalls
       .consumingAPI<IVideo>(
-        `${constants.apiUrl}/movie/${id}/videos?api_key=${constants.apiKey}&language=en-US`,
+        `${mainConstants.apiUrl}/movie/${id}/videos?api_key=${mainConstants.apiKey}&language=en-US`,
         'GET'
       )
       .pipe(
@@ -53,7 +53,7 @@ export class MoviesService {
   getMovieImages(id: string): Observable<IImage[]> {
     return this._httpCalls
       .consumingAPI<IImage>(
-        `${constants.apiUrl}/movie/${id}/images?api_key=${constants.apiKey}`,
+        `${mainConstants.apiUrl}/movie/${id}/images?api_key=${mainConstants.apiKey}`,
         'GET'
       )
       .pipe(
@@ -65,7 +65,7 @@ export class MoviesService {
   getMovieCast(id: string): Observable<IActor[]> {
     return this._httpCalls
       .consumingAPI<IActor[]>(
-        `${constants.apiUrl}/movie/${id}/credits?api_key=${constants.apiKey}`,
+        `${mainConstants.apiUrl}/movie/${id}/credits?api_key=${mainConstants.apiKey}`,
         'GET'
       )
       .pipe(

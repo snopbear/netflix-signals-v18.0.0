@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, input, Input, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({

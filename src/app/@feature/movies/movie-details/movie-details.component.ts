@@ -1,31 +1,18 @@
-import { AsyncPipe, CurrencyPipe, DatePipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { IActor, IImage, IMovie, IVideo } from '@models/interfaces';
 import { MoviesService } from '@services-specific/index';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { map, Observable } from 'rxjs';
-import { SliderComponent } from 'src/app/@shared/components/slider/slider.component';
-import { VideoEmbedComponent } from 'src/app/@shared/components/video-embed/video-embed.component';
-import { IMAGES_SIZES } from 'src/app/images-sizes';
+import { IMAGES_SIZES } from '@constants/index';
+import movieDetailsComponentImports from './movie-details.component.imports';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css'],
   standalone: true,
-  imports: [
-    SliderComponent,
-    VideoEmbedComponent,
-    JsonPipe,
-    AsyncPipe,
-    NgIf,
-    DatePipe,
-    CurrencyPipe,
-    NgFor,
-    SlickCarouselModule,
-  ],
+  imports: [movieDetailsComponentImports],
 })
 export class MovieDetailsComponent implements OnInit {
   private _activeRoute = inject(ActivatedRoute);
@@ -85,7 +72,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   slickInit(e: any) {
-    console.log(e,'slick initialized');
+    console.log(e, 'slick initialized');
   }
 
   breakpoint(e: any) {

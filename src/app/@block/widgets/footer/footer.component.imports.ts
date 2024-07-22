@@ -1,7 +1,7 @@
-// import { DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 
-// const modules = [DatePipe];
+const modules = [DatePipe];
 
-// const footerComponentsImports = [...modules];
+const footerComponentsImports = [...modules];
 
-// export default footerComponentsImports;
+export default footerComponentsImports;
