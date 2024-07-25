@@ -1,18 +1,18 @@
 import { NgIf, NgFor, DatePipe, CurrencyPipe } from "@angular/common";
-import { SlickCarouselModule } from "ngx-slick-carousel";
 import { SliderComponent } from "src/app/@shared/components/slider/slider.component";
 import { VideoEmbedComponent } from "src/app/@shared/components/video-embed/video-embed.component";
-
+import { CarouselModule } from 'primeng/carousel';
+import { ImageModule } from 'primeng/image';
 const components = [SliderComponent, VideoEmbedComponent];
 const directives = [NgIf, NgFor];
 const pipes = [DatePipe, CurrencyPipe];
-const modules = [SlickCarouselModule];
+const modules = [CarouselModule, ImageModule];
 
 const movieDetailsComponentImports = [
   ...components,
   ...directives,
   ...pipes,
-  ...modules,
+  ...modules
 ];
 
 export default movieDetailsComponentImports;

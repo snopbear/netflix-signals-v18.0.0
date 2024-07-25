@@ -9,10 +9,10 @@ export const routes: Routes = [
       import('./@feature/home/home.component').then((x) => x.HomeComponent),
   },
   {
-    path: 'movies-list',
+    path: 'list',
     loadComponent: () =>
-      import('./@feature/movies/movie-list/movie-list.component').then(
-        (x) => x.MovieListComponent
+      import('./@feature/movies/show-list/show-list.component').then(
+        (x) => x.ShowListComponent
       ),
   },
   {

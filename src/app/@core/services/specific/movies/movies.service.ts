@@ -74,4 +74,18 @@ export class MoviesService {
         })
       );
   }
+
+  searchMovies(page: number,searchValue?:string): Observable<IMovieDTO> {
+    const uri = searchValue ? 'search/movie' : 'movie/popular';
+    return this._httpCalls
+      .consumingAPI<IMovieDTO>(
+        `${mainConstants.apiUrl}/${uri}?query=${searchValue}&page=${page}&api_key=${mainConstants.apiKey}`,
+        'GET'
+      )
+      .pipe(
+        map((res: IMovieDTO | any) => {
+          return res as IMovieDTO;
+        })
+      );
+  }
 }
