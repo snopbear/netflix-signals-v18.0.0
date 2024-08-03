@@ -1,4 +1,3 @@
-import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import {
   Component,
   inject,
@@ -7,26 +6,17 @@ import {
   signal,
   effect,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {  IMovieDTO } from '@models/interfaces';
+import { IMovieDTO } from '@models/interfaces';
 import { MoviesService } from '@services-specific/index';
-import { ShowItemComponent } from 'src/app/@shared/components/show-item/show-item.component';
-import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { PaginatorState } from 'primeng/paginator';
+import movieDetailsComponentImports from './show-list.component.imports';
 
 @Component({
   selector: 'app-show-list',
   templateUrl: './show-list.component.html',
   styleUrls: ['./show-list.component.css'],
   standalone: true,
-  imports: [
-    FormsModule,
-    NgIf,
-    NgFor,
-    AsyncPipe,
-    ShowItemComponent,
-    JsonPipe,
-    PaginatorModule,
-  ],
+  imports: [movieDetailsComponentImports],
 })
 export class ShowListComponent implements OnInit {
   private _moviesService = inject(MoviesService);
@@ -56,12 +46,11 @@ export class ShowListComponent implements OnInit {
 
   searchChanged() {
     this.currentPage.set(1); // Reset to first page on search change
-    
-    
-      if (event && event.target && event.target instanceof HTMLInputElement) {
-        this.searchValue.set(event.target.value);
-      }
+
+    if (event && event.target && event.target instanceof HTMLInputElement) {
+      this.searchValue.set(event.target.value);
     }
+  }
 
   pageChanged(event: PaginatorState) {
     const pageNumber = event.page ? event.page + 1 : 1;

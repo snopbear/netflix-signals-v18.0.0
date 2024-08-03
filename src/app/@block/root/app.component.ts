@@ -10,6 +10,6 @@ import appComponentsImports from './app.component.imports';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'angular-folder-structure-base-v18';
+  title = 'NG Flex';
 
 }

@@ -3,16 +3,17 @@ import { SliderComponent } from "src/app/@shared/components/slider/slider.compon
 import { VideoEmbedComponent } from "src/app/@shared/components/video-embed/video-embed.component";
 import { CarouselModule } from 'primeng/carousel';
 import { ImageModule } from 'primeng/image';
+
 const components = [SliderComponent, VideoEmbedComponent];
-const directives = [NgIf, NgFor];
+const common = [NgIf, NgFor];
 const pipes = [DatePipe, CurrencyPipe];
 const modules = [CarouselModule, ImageModule];
 
 const movieDetailsComponentImports = [
   ...components,
-  ...directives,
+  ...common,
   ...pipes,
-  ...modules
+  ...modules,
 ];
 
 export default movieDetailsComponentImports;

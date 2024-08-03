@@ -18,7 +18,7 @@ export class TvSeriesService {
     return this._httpCalls
       .consumingAPI<ITvShow[]>(this.Urls.popular, 'GET')
       .pipe(
-        map((res: ITvShow | any) => {
+        map((res: any) => {
           return res.results.slice(0, 18) as ITvShow[];
         })
       );

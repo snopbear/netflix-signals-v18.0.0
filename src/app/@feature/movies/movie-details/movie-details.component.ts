@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { map, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { IActor, IImage, IMovie, IVideo } from '@models/interfaces';
 import { MoviesService } from '@services-specific/index';
-import { map, Observable } from 'rxjs';
 import { IMAGES_SIZES } from '@constants/index';
 import movieDetailsComponentImports from './movie-details.component.imports';
 
@@ -15,36 +15,41 @@ import movieDetailsComponentImports from './movie-details.component.imports';
   imports: [movieDetailsComponentImports],
 })
 export class MovieDetailsComponent {
-  //#region Injectable
+
   private _activeRoute = inject(ActivatedRoute);
   private _moviesService = inject(MoviesService);
-  //#endregion
+ 
 
-  //#region configs
   param = this._activeRoute.snapshot.params['id'];
   slideConfig = { slidesToShow: 4, slidesToScroll: 4 };
   imagesSizes = IMAGES_SIZES;
-  //#endregion
 
-  //#region observables and signals
 
   private moviesDetails$: Observable<IMovie[]> = this._moviesService
     .getMovieById(this.param)
     .pipe(map((movie) => [movie]));
+
   moviesDetailsSignal = toSignal(this.moviesDetails$, { initialValue: [] });
+
+
 
   private videoDetails$: Observable<IVideo[]> =
     this._moviesService.getMovieVideos(this.param);
+
   videoDetailsSignal = toSignal(this.videoDetails$, { initialValue: [] });
+
+
 
   private imagesDetails$: Observable<IImage[]> =
     this._moviesService.getMovieImages(this.param);
+
   imagesDetailsSignal = toSignal(this.imagesDetails$, { initialValue: [] });
+
 
   private castDetails$: Observable<IActor[]> = this._moviesService.getMovieCast(
     this.param
   );
   castDetailsSignal = toSignal(this.castDetails$, { initialValue: [] });
 
-  //#endregion
+
 }

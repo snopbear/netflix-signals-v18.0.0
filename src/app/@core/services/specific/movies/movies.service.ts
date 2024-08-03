@@ -5,7 +5,6 @@ import { HttpCallsService } from '@services-common/index';
 import {
   IActor,
   IGenre,
-  IGenreDTO,
   IImage,
   IMovie,
   IMovieDTO,
@@ -21,12 +20,12 @@ export class MoviesService {
 
   getMovies(type: MovieType, count = 20): Observable<IMovie[]> {
     return this._httpCalls
-      .consumingAPI<IMovieDTO[]>(
+      .consumingAPI<IMovie[]>(
         `${mainConstants.apiUrl}/movie/${type}?api_key=${mainConstants.apiKey}`,
         'GET'
       )
       .pipe(
-        map((res: IMovieDTO | any) => {
+        map((res: any) => {
           return res.results.slice(0, count) as IMovie[];
         })
       );
@@ -39,7 +38,7 @@ export class MoviesService {
         'GET'
       )
       .pipe(
-        map((res: IMovie | any) => {
+        map((res: any) => {
           return res;
         })
       );
@@ -52,7 +51,7 @@ export class MoviesService {
         'GET'
       )
       .pipe(
-        map((res: IVideo[] | any) => {
+        map((res: any) => {
           return res.results as IVideo[];
         })
       );
@@ -65,7 +64,7 @@ export class MoviesService {
         'GET'
       )
       .pipe(
-        map((res: IImage[] | any) => {
+        map((res: any) => {
           return res.backdrops as IImage[];
         })
       );
@@ -77,7 +76,7 @@ export class MoviesService {
         'GET'
       )
       .pipe(
-        map((res: IActor[] | any) => {
+        map((res: any) => {
           return res.cast as IActor[];
         })
       );
@@ -91,7 +90,7 @@ export class MoviesService {
         'GET'
       )
       .pipe(
-        map((res: IMovieDTO | any) => {
+        map((res: any) => {
           return res as IMovieDTO;
         })
       );
@@ -104,7 +103,7 @@ export class MoviesService {
         'GET'
       )
       .pipe(
-        map((res: IMovie[] | any) => {
+        map((res: any) => {
           return res.genres as IGenre[];
         })
       );
@@ -117,7 +116,7 @@ export class MoviesService {
         'GET'
       )
       .pipe(
-        map((res: IMovie []| any) => {
+        map((res: any) => {
           return res.results as IMovie[];
         })
       );
