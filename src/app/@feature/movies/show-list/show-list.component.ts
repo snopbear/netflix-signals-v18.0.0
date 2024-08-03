@@ -1,10 +1,15 @@
 import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  Component,
+  inject,
+  OnInit,
+  WritableSignal,
+  signal,
+  effect,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IMovie, IMovieDTO } from '@models/interfaces';
+import {  IMovieDTO } from '@models/interfaces';
 import { MoviesService } from '@services-specific/index';
-import { map, Observable } from 'rxjs';
 import { ShowItemComponent } from 'src/app/@shared/components/show-item/show-item.component';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 
@@ -26,24 +31,40 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 export class ShowListComponent implements OnInit {
   private _moviesService = inject(MoviesService);
 
-  showsList$: Observable<IMovieDTO> | null = null;
+  // Define signals
+  showsList: WritableSignal<IMovieDTO | null> = signal(null);
+  searchValue: WritableSignal<string> = signal('');
+  currentPage: WritableSignal<number> = signal(1);
 
-  searchValue = '';
+  constructor() {
+    // Set up an effect to fetch data whenever the page or search value changes
+    effect(() => {
+      this.getPagedShows(this.currentPage(), this.searchValue());
+    });
+  }
 
   ngOnInit(): void {
+    // Fetch initial data
     this.getPagedShows(1);
   }
 
   getPagedShows(page: number, searchKeyword?: string) {
-    this.showsList$ = this._moviesService.searchMovies(page, searchKeyword);
+    this._moviesService.searchMovies(page, searchKeyword).subscribe((data) => {
+      this.showsList.set(data);
+    });
   }
 
   searchChanged() {
-    this.getPagedShows(1, this.searchValue);
-  }
+    this.currentPage.set(1); // Reset to first page on search change
+    
+    
+      if (event && event.target && event.target instanceof HTMLInputElement) {
+        this.searchValue.set(event.target.value);
+      }
+    }
 
   pageChanged(event: PaginatorState) {
     const pageNumber = event.page ? event.page + 1 : 1;
-    this.getPagedShows(pageNumber, this.searchValue);
+    this.currentPage.set(pageNumber);
   }
 }

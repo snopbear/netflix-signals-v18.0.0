@@ -22,12 +22,27 @@ export const routes: Routes = [
         (x) => x.MovieDetailsComponent
       ),
   },
-  //   {
-  //     path: 'associate/:id',
-  //     loadComponent: () =>
-  //       import(
-  //         './@feature/associate/associate-listing/associate-listing.component'
-  //       ).then((x) => x.AssociateListingComponent),
-  //   },
+  {
+    path: 'show-list',
+    loadComponent: () =>
+      import('./@feature/movies/show-list/show-list.component').then(
+        (x) => x.ShowListComponent
+      ),
+  },
+  {
+    path: 'genres',
+    loadComponent: () =>
+      import('./@feature/movies/genres/genres.component').then(
+        (x) => x.GenresComponent
+      ),
+  },
+  {
+    path: 'genres/:genreId',
+    loadComponent: () =>
+      import('./@feature/movies/genres/genres.component').then(
+        (x) => x.GenresComponent
+      ),
+  },
+
   { path: '**', component: NotFoundComponent },
 ];

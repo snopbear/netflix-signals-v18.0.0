@@ -2,7 +2,15 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { mainConstants } from '@constants/index';
 import { HttpCallsService } from '@services-common/index';
-import { IActor, IImage, IMovie, IMovieDTO, IVideo } from '@models/interfaces';
+import {
+  IActor,
+  IGenre,
+  IGenreDTO,
+  IImage,
+  IMovie,
+  IMovieDTO,
+  IVideo,
+} from '@models/interfaces';
 import { MovieType } from '@models/types';
 
 @Injectable({
@@ -75,7 +83,7 @@ export class MoviesService {
       );
   }
 
-  searchMovies(page: number,searchValue?:string): Observable<IMovieDTO> {
+  searchMovies(page: number, searchValue?: string): Observable<IMovieDTO> {
     const uri = searchValue ? 'search/movie' : 'movie/popular';
     return this._httpCalls
       .consumingAPI<IMovieDTO>(
@@ -85,6 +93,32 @@ export class MoviesService {
       .pipe(
         map((res: IMovieDTO | any) => {
           return res as IMovieDTO;
+        })
+      );
+  }
+
+  getMoviesGenres() {
+    return this._httpCalls
+      .consumingAPI<IGenre[]>(
+        `${mainConstants.apiUrl}/genre/movie/list?api_key=${mainConstants.apiKey}`,
+        'GET'
+      )
+      .pipe(
+        map((res: IMovie[] | any) => {
+          return res.genres as IGenre[];
+        })
+      );
+  }
+
+  getMoviesByGenre(genreId: string, pageNumber = 1) {
+    return this._httpCalls
+      .consumingAPI<IMovie[]>(
+        `${mainConstants.apiUrl}/discover/movie?with_genres=${genreId}&page=${pageNumber}&api_key=${mainConstants.apiKey}`,
+        'GET'
+      )
+      .pipe(
+        map((res: IMovie []| any) => {
+          return res.results as IMovie[];
         })
       );
   }

@@ -16,7 +16,7 @@ export interface IMovie {
   revenue?: number;
   runtime?: string;
   status?: string;
-  genres?: Genre[];
+  genres?: IGenre[];
 }
 
 export interface IMovieDTO {
@@ -26,7 +26,10 @@ export interface IMovieDTO {
   total_results: number;
 }
 
-export interface Genre  {
+export interface IGenre  {
   id: string;
   name: string;
+};
+export interface IGenreDTO {
+  genres: IGenre[];
 };
